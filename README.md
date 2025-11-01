@@ -1,33 +1,57 @@
-This is a [Plasmo extension](https://docs.plasmo.com/) project bootstrapped with [`plasmo init`](https://www.npmjs.com/package/plasmo).
+Here’s the same content formatted cleanly as a Markdown (`README.md`) file:
 
-## Getting Started
+````md
+# Project Setup Guide
 
-First, run the development server:
-
+## 1. Clone the Repository
 ```bash
-pnpm dev
-# or
-npm run dev
-```
+git clone <repository-url>
+cd <repository-folder>
+````
 
-Open your browser and load the appropriate development build. For example, if you are developing for the chrome browser, using manifest v3, use: `build/chrome-mv3-dev`.
+## 2. Install Dependencies
 
-You can start editing the popup by modifying `popup.tsx`. It should auto-update as you make changes. To add an options page, simply add a `options.tsx` file to the root of the project, with a react component default exported. Likewise to add a content page, add a `content.ts` file to the root of the project, importing some module and do some logic, then reload the extension on your browser.
+* If you have **pnpm**:
 
-For further guidance, [visit our Documentation](https://docs.plasmo.com/)
+  ```bash
+  pnpm i
+  ```
+* If you use **npm**:
 
-## Making production build
+  ```bash
+  npm i
+  ```
 
-Run the following:
+## 3. Start the Development Server
 
-```bash
-pnpm build
-# or
-npm run build
-```
+* For **pnpm**:
 
-This should create a production bundle for your extension, ready to be zipped and published to the stores.
+  ```bash
+  pnpm run dev
+  ```
+* For **npm**:
 
-## Submit to the webstores
+  ```bash
+  npm run dev
+  ```
 
-The easiest way to deploy your Plasmo extension is to use the built-in [bpp](https://bpp.browser.market) GitHub action. Prior to using this action however, make sure to build your extension and upload the first version to the store to establish the basic credentials. Then, simply follow [this setup instruction](https://docs.plasmo.com/framework/workflows/submit) and you should be on your way for automated submission!
+## 4. Load the Extension in Chrome
+
+1. Open Chrome and navigate to:
+
+   ```
+   chrome://extensions
+   ```
+2. Enable **Developer Mode** (top-right corner).
+3. Click **Load unpacked** (top-left corner).
+4. Select the `chrome-mv3-dev` folder from your project directory.
+
+   Example:
+
+   ```
+   /home/prashantsingh/prashant_workspace/code/chrome-mv3-dev
+   ```
+
+## 5. Open a New Tab
+
+The extension should now be active and ready to use.
