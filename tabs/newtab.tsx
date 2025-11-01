@@ -1,11 +1,10 @@
 import React from "react"
-
 import "../style.css"
-
-import AuthScreen from "~components/AuthScreen"
-import FocusTimer from "~components/FocusTimer"
-import TodoWidget from "~components/TodoWidget"
 import { useAuth } from "~hooks/useAuth"
+import AuthScreen from "~components/AuthScreen"
+import TodoWidget from "~components/TodoWidget"
+import FocusTimer from "~components/FocusTimer"
+import MotivationWidget from "~components/MotivationWidget"
 
 function NewTabPage() {
   const { isAuthenticated, isLoading, login } = useAuth()
@@ -54,7 +53,7 @@ function NewTabPage() {
             <h2 className="text-2xl font-semibold text-primary-500 mb-4">
               Daily Motivation
             </h2>
-            <p className="text-gray-600">Motivation widget coming soon...</p>
+            <MotivationWidget />
           </div>
 
           {/* Widget 4: Quick Bookmarks */}
@@ -62,7 +61,7 @@ function NewTabPage() {
             <h2 className="text-2xl font-semibold text-primary-500 mb-4">
               Quick Bookmarks
             </h2>
-            <p className="text-gray-600">Bookmarks widget coming soon...</p>
+            <p className="text-gray-600">Bookmarks widget coming next...</p>
           </div>
         </main>
       </div>
