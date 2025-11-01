@@ -1,8 +1,11 @@
 import React from "react"
+
 import "../style.css"
-import { useAuth } from "~hooks/useAuth"
+
 import AuthScreen from "~components/AuthScreen"
+import FocusTimer from "~components/FocusTimer"
 import TodoWidget from "~components/TodoWidget"
+import { useAuth } from "~hooks/useAuth"
 
 function NewTabPage() {
   const { isAuthenticated, isLoading, login } = useAuth()
@@ -43,7 +46,7 @@ function NewTabPage() {
             <h2 className="text-2xl font-semibold text-primary-500 mb-4">
               Focus Timer
             </h2>
-            <p className="text-gray-600">Timer widget coming next...</p>
+            <FocusTimer />
           </div>
 
           {/* Widget 3: Motivation */}

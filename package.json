@@ -30,7 +30,8 @@
       "storage",
       "tabs",
       "bookmarks",
-      "identity"
+      "identity",
+      "notifications"
     ],
     "host_permissions": [
       "https://focusez.vercel.app/*",
