@@ -1,8 +1,24 @@
 import React from "react"
-
 import "../style.css"
+import { useAuth } from "~hooks/useAuth"
+import AuthScreen from "~components/AuthScreen"
+import TodoWidget from "~components/TodoWidget"
 
 function NewTabPage() {
+  const { isAuthenticated, isLoading, login } = useAuth()
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-white text-2xl">Loading...</div>
+      </div>
+    )
+  }
+
+  // if (!isAuthenticated) {
+  //   return <AuthScreen onLogin={login} />
+  // }
+
   return (
     <div className="min-h-screen p-10">
       <div className="max-w-7xl mx-auto">
@@ -15,35 +31,35 @@ function NewTabPage() {
         {/* Widgets Grid */}
         <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* Widget 1: Priority Tasks - Takes 2 columns */}
-          <div className="lg:col-span-2 bg-white/95 rounded-xl p-6 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
+          <div className="lg:col-span-2 bg-white/95 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-200">
             <h2 className="text-2xl font-semibold text-primary-500 mb-4">
               Priority Tasks
             </h2>
-            <p className="text-gray-600">Todo widget will go here</p>
+            <TodoWidget />
           </div>
 
           {/* Widget 2: Focus Timer */}
-          <div className="bg-white/95 rounded-xl p-6 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
+          <div className="bg-white/95 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-200">
             <h2 className="text-2xl font-semibold text-primary-500 mb-4">
               Focus Timer
             </h2>
-            <p className="text-gray-600">Timer widget will go here</p>
+            <p className="text-gray-600">Timer widget coming next...</p>
           </div>
 
           {/* Widget 3: Motivation */}
-          <div className="bg-white/95 rounded-xl p-6 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
+          <div className="bg-white/95 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-200">
             <h2 className="text-2xl font-semibold text-primary-500 mb-4">
               Daily Motivation
             </h2>
-            <p className="text-gray-600">Motivation widget will go here</p>
+            <p className="text-gray-600">Motivation widget coming soon...</p>
           </div>
 
           {/* Widget 4: Quick Bookmarks */}
-          <div className="lg:col-span-2 bg-white/95 rounded-xl p-6 shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
+          <div className="lg:col-span-2 bg-white/95 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-200">
             <h2 className="text-2xl font-semibold text-primary-500 mb-4">
               Quick Bookmarks
             </h2>
-            <p className="text-gray-600">Bookmarks widget will go here</p>
+            <p className="text-gray-600">Bookmarks widget coming soon...</p>
           </div>
         </main>
       </div>

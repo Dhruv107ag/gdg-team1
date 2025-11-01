@@ -29,10 +29,12 @@
     "permissions": [
       "storage",
       "tabs",
-      "bookmarks"
+      "bookmarks",
+      "identity"
     ],
     "host_permissions": [
-      "https://focusez.vercel.app/*"
+      "https://focusez.vercel.app/*",
+      "http://localhost:3000/*"
     ],
     "chrome_url_overrides": {
       "newtab": "tabs/newtab.html"
