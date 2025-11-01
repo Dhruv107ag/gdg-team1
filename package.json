@@ -31,11 +31,11 @@
       "tabs",
       "bookmarks",
       "identity",
-      "notifications"
+      "notifications",
+      "activeTab"
     ],
     "host_permissions": [
-      "https://focusez.vercel.app/*",
-      "http://localhost:3000/*"
+      "<all_urls>"
     ],
     "chrome_url_overrides": {
       "newtab": "tabs/newtab.html"

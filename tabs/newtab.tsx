@@ -5,6 +5,7 @@ import AuthScreen from "~components/AuthScreen"
 import TodoWidget from "~components/TodoWidget"
 import FocusTimer from "~components/FocusTimer"
 import MotivationWidget from "~components/MotivationWidget"
+import BookmarksWidget from "~components/BookmarksWidget"
 
 function NewTabPage() {
   const { isAuthenticated, isLoading, login } = useAuth()
@@ -61,7 +62,7 @@ function NewTabPage() {
             <h2 className="text-2xl font-semibold text-primary-500 mb-4">
               Quick Bookmarks
             </h2>
-            <p className="text-gray-600">Bookmarks widget coming next...</p>
+            <BookmarksWidget />
           </div>
         </main>
       </div>
