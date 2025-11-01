@@ -2,6 +2,9 @@
 
 A modern productivity dashboard that replaces your new tab with a beautiful, customizable workspace featuring task management, focus timers, motivational quotes, and quick bookmarks.
 
+Demo Video Link - https://www.loom.com/share/320c764d317248f191236fd724158c08
+Code Setup Video Guide - https://www.loom.com/share/5945cc981fae4d8b9c291c8bab97c16d
+
 ## 🚀 Quick Start
 
 ### 1. Clone the Repository
