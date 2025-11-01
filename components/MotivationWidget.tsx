@@ -60,6 +60,38 @@ const MotivationWidget: React.FC = () => {
       text: "The secret of getting ahead is getting started.",
       author: "Mark Twain",
     },
+    {
+      text: "Don't let yesterday take up too much of today.",
+      author: "Will Rogers",
+    },
+    {
+      text: "You learn more from failure than from success. Don't let it stop you.",
+      author: "Unknown",
+    },
+    {
+      text: "It's not whether you get knocked down, it's whether you get up.",
+      author: "Vince Lombardi",
+    },
+    {
+      text: "People who are crazy enough to think they can change the world, are the ones who do.",
+      author: "Rob Siltanen",
+    },
+    {
+      text: "Failure will never overtake me if my determination to succeed is strong enough.",
+      author: "Og Mandino",
+    },
+    {
+      text: "We may encounter many defeats but we must not be defeated.",
+      author: "Maya Angelou",
+    },
+    {
+      text: "Knowing is not enough; we must apply. Wishing is not enough; we must do.",
+      author: "Johann Wolfgang Von Goethe",
+    },
+    {
+      text: "Whether you think you can or think you can't, you're right.",
+      author: "Henry Ford",
+    },
   ]
 
   // Unsplash image IDs for nature/calm images
@@ -69,63 +101,50 @@ const MotivationWidget: React.FC = () => {
     "photo-1470071459604-3b5ec3a7fe05", // sunset
     "photo-1447752875215-b2761acb3c5d", // flowers
     "photo-1501594907352-04cda38ebc29", // ocean
-    "photo-1506905925346-21bda4d32df4", // lake
     "photo-1469474968028-56623f02e42e", // nature
     "photo-1518531933037-91b2f5f229cc", // peaceful
+    "photo-1507525428034-b723cf961d3e", // beach
+    "photo-1472214103451-9374bd1c798e", // mountains
+    "photo-1464822759023-fed622ff2c3b", // snow mountains
   ]
 
   useEffect(() => {
-    loadDailyMotivation()
+    // Load new quote on every mount (every new tab/refresh)
+    loadNewQuote()
   }, [])
 
-  const loadDailyMotivation = async () => {
-    // Check if we already have today's quote
-    const today = new Date().toDateString()
-    const storage = await chrome.storage.local.get(["motivationQuote", "motivationDate", "motivationImage"])
-
-    if (storage.motivationDate === today && storage.motivationQuote) {
-      // Use stored quote for today
-      setCurrentQuote(storage.motivationQuote)
-      setBackgroundImage(storage.motivationImage)
-    } else {
-      // Generate new quote for today
-      const randomQuote = quotes[Math.floor(Math.random() * quotes.length)]
-      const randomImageId = imageIds[Math.floor(Math.random() * imageIds.length)]
-      const imageUrl = `https://images.unsplash.com/${randomImageId}?w=400&h=300&fit=crop`
-
-      setCurrentQuote(randomQuote)
-      setBackgroundImage(imageUrl)
-
-      // Store for today
-      await chrome.storage.local.set({
-        motivationQuote: randomQuote,
-        motivationDate: today,
-        motivationImage: imageUrl,
-      })
-    }
-  }
-
-  const refreshQuote = async () => {
+  const loadNewQuote = async () => {
+    // Always generate a new random quote
     const randomQuote = quotes[Math.floor(Math.random() * quotes.length)]
     const randomImageId = imageIds[Math.floor(Math.random() * imageIds.length)]
     const imageUrl = `https://images.unsplash.com/${randomImageId}?w=400&h=300&fit=crop`
 
     setCurrentQuote(randomQuote)
     setBackgroundImage(imageUrl)
+  }
 
-    // Update storage
-    const today = new Date().toDateString()
-    await chrome.storage.local.set({
-      motivationQuote: randomQuote,
-      motivationDate: today,
-      motivationImage: imageUrl,
-    })
+  const refreshQuote = () => {
+    // Generate a new quote different from current one
+    let newQuote = quotes[Math.floor(Math.random() * quotes.length)]
+    
+    // Try to get a different quote than the current one
+    let attempts = 0
+    while (newQuote.text === currentQuote?.text && attempts < 5) {
+      newQuote = quotes[Math.floor(Math.random() * quotes.length)]
+      attempts++
+    }
+
+    const randomImageId = imageIds[Math.floor(Math.random() * imageIds.length)]
+    const imageUrl = `https://images.unsplash.com/${randomImageId}?w=400&h=300&fit=crop`
+
+    setCurrentQuote(newQuote)
+    setBackgroundImage(imageUrl)
   }
 
   if (!currentQuote) {
     return (
       <div className="flex items-center justify-center py-8">
-        <div className="text-gray-400">Loading inspiration...</div>
+        <div className="text-gray-400 dark:text-gray-500">Loading inspiration...</div>
       </div>
     )
   }
@@ -134,7 +153,7 @@ const MotivationWidget: React.FC = () => {
     <div className="space-y-4">
       {/* Background Image */}
       <div
-        className="relative h-48 rounded-lg overflow-hidden bg-gradient-to-br from-primary-400 to-secondary-500"
+        className="relative h-48 rounded-lg overflow-hidden bg-gradient-to-br from-primary-400 to-secondary-500 dark:from-primary-600 dark:to-secondary-700"
         style={{
           backgroundImage: backgroundImage ? `url(${backgroundImage})` : undefined,
           backgroundSize: "cover",
@@ -142,7 +161,7 @@ const MotivationWidget: React.FC = () => {
         }}
       >
         {/* Overlay for better text readability */}
-        <div className="absolute inset-0 bg-black/30" />
+        <div className="absolute inset-0 bg-black/40 dark:bg-black/50" />
         
         {/* Quote Content */}
         <div className="relative h-full flex flex-col items-center justify-center p-6 text-center">
@@ -154,11 +173,11 @@ const MotivationWidget: React.FC = () => {
             <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
           </svg>
           
-          <blockquote className="text-white text-lg font-medium leading-relaxed mb-3">
+          <blockquote className="text-white text-lg font-medium leading-relaxed mb-3 drop-shadow-lg">
             {currentQuote.text}
           </blockquote>
           
-          <cite className="text-white/80 text-sm not-italic">
+          <cite className="text-white/90 text-sm not-italic drop-shadow">
             — {currentQuote.author}
           </cite>
         </div>
@@ -167,7 +186,7 @@ const MotivationWidget: React.FC = () => {
       {/* Refresh Button */}
       <button
         onClick={refreshQuote}
-        className="w-full py-2 px-4 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors duration-200 text-sm font-medium flex items-center justify-center gap-2"
+        className="w-full py-2 px-4 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 rounded-lg transition-colors duration-200 text-sm font-medium flex items-center justify-center gap-2"
       >
         <svg
           className="w-4 h-4"

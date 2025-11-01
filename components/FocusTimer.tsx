@@ -114,23 +114,23 @@ const FocusTimer: React.FC = () => {
   }
 
   const getTimerColor = () => {
-    if (!timer) return "text-gray-400"
+    if (!timer) return "text-gray-400 dark:text-gray-500"
     
     const percentage = (timer.remainingSeconds / timer.totalSeconds) * 100
     
-    if (percentage > 50) return "text-green-500"
-    if (percentage > 25) return "text-yellow-500"
-    return "text-red-500"
+    if (percentage > 50) return "text-green-500 dark:text-green-400"
+    if (percentage > 25) return "text-yellow-500 dark:text-yellow-400"
+    return "text-red-500 dark:text-red-400"
   }
 
   const getProgressColor = () => {
-    if (!timer) return "bg-gray-300"
+    if (!timer) return "bg-gray-300 dark:bg-gray-600"
     
     const percentage = (timer.remainingSeconds / timer.totalSeconds) * 100
     
-    if (percentage > 50) return "bg-green-500"
-    if (percentage > 25) return "bg-yellow-500"
-    return "bg-red-500"
+    if (percentage > 50) return "bg-green-500 dark:bg-green-400"
+    if (percentage > 25) return "bg-yellow-500 dark:bg-yellow-400"
+    return "bg-red-500 dark:bg-red-400"
   }
 
   const getProgressPercentage = () => {
@@ -143,9 +143,9 @@ const FocusTimer: React.FC = () => {
     return (
       <div className="space-y-4">
         <div className="text-center py-4">
-          <div className="w-16 h-16 bg-primary-100 rounded-full mx-auto flex items-center justify-center mb-3">
+          <div className="w-16 h-16 bg-primary-100 dark:bg-primary-900/30 rounded-full mx-auto flex items-center justify-center mb-3">
             <svg
-              className="w-8 h-8 text-primary-500"
+              className="w-8 h-8 text-primary-500 dark:text-primary-400"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -158,7 +158,7 @@ const FocusTimer: React.FC = () => {
               />
             </svg>
           </div>
-          <p className="text-gray-600 text-sm">Start a focus session</p>
+          <p className="text-gray-600 dark:text-gray-400 text-sm">Start a focus session</p>
         </div>
 
         <div className="space-y-3">
@@ -167,7 +167,7 @@ const FocusTimer: React.FC = () => {
             placeholder="What are you working on?"
             value={inputTaskName}
             onChange={(e) => setInputTaskName(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 placeholder:text-gray-400 dark:placeholder:text-gray-500"
             onKeyPress={(e) => e.key === "Enter" && startTimer()}
           />
 
@@ -177,13 +177,13 @@ const FocusTimer: React.FC = () => {
               placeholder="Minutes"
               value={inputMinutes}
               onChange={(e) => setInputMinutes(e.target.value)}
-              className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+              className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 placeholder:text-gray-400 dark:placeholder:text-gray-500"
               min="1"
               onKeyPress={(e) => e.key === "Enter" && startTimer()}
             />
             <button
               onClick={startTimer}
-              className="px-6 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600 transition-colors duration-200 font-medium"
+              className="px-6 py-2 bg-primary-500 dark:bg-primary-600 text-white rounded-lg hover:bg-primary-600 dark:hover:bg-primary-700 transition-colors duration-200 font-medium"
             >
               Start
             </button>
@@ -198,7 +198,7 @@ const FocusTimer: React.FC = () => {
               onClick={() => {
                 setInputMinutes(mins.toString())
               }}
-              className="py-2 px-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors duration-200 text-sm font-medium"
+              className="py-2 px-3 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200 text-sm font-medium"
             >
               {mins}m
             </button>
@@ -213,11 +213,11 @@ const FocusTimer: React.FC = () => {
     <div className="space-y-4">
       {/* Task Name */}
       <div className="text-center">
-        <h3 className="text-lg font-semibold text-gray-800 mb-1">
+        <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-1">
           {timer.taskName}
         </h3>
         {timer.isPaused && (
-          <span className="text-sm text-yellow-600 font-medium">Paused</span>
+          <span className="text-sm text-yellow-600 dark:text-yellow-400 font-medium">Paused</span>
         )}
       </div>
 
@@ -229,7 +229,7 @@ const FocusTimer: React.FC = () => {
       </div>
 
       {/* Progress Bar */}
-      <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 overflow-hidden">
         <div
           className={`h-full ${getProgressColor()} transition-all duration-1000 ease-linear`}
           style={{ width: `${getProgressPercentage()}%` }}
@@ -241,28 +241,28 @@ const FocusTimer: React.FC = () => {
         {timer.isPaused ? (
           <button
             onClick={resumeTimer}
-            className="flex-1 py-2 px-4 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors duration-200 font-medium"
+            className="flex-1 py-2 px-4 bg-green-500 dark:bg-green-600 text-white rounded-lg hover:bg-green-600 dark:hover:bg-green-700 transition-colors duration-200 font-medium"
           >
             Resume
           </button>
         ) : (
           <button
             onClick={pauseTimer}
-            className="flex-1 py-2 px-4 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-colors duration-200 font-medium"
+            className="flex-1 py-2 px-4 bg-yellow-500 dark:bg-yellow-600 text-white rounded-lg hover:bg-yellow-600 dark:hover:bg-yellow-700 transition-colors duration-200 font-medium"
           >
             Pause
           </button>
         )}
         <button
           onClick={stopTimer}
-          className="flex-1 py-2 px-4 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors duration-200 font-medium"
+          className="flex-1 py-2 px-4 bg-red-500 dark:bg-red-600 text-white rounded-lg hover:bg-red-600 dark:hover:bg-red-700 transition-colors duration-200 font-medium"
         >
           Stop
         </button>
       </div>
 
       {/* Time Info */}
-      <div className="text-center text-xs text-gray-500">
+      <div className="text-center text-xs text-gray-500 dark:text-gray-400">
         Total: {formatTime(timer.totalSeconds)}
       </div>
     </div>

@@ -76,9 +76,9 @@ const BookmarksWidget: React.FC = () => {
   return (
     <div className="space-y-4">
       {/* Keyboard shortcut hint */}
-      <div className="bg-primary-50 border border-primary-200 rounded-lg p-3 text-sm text-primary-700">
+      <div className="bg-primary-50 dark:bg-primary-900/20 border border-primary-200 dark:border-primary-800 rounded-lg p-3 text-sm text-primary-700 dark:text-primary-300">
         <span className="font-semibold">Tip:</span> Press{" "}
-        <kbd className="px-2 py-1 bg-white border border-primary-300 rounded text-xs font-mono">
+        <kbd className="px-2 py-1 bg-white dark:bg-gray-700 border border-primary-300 dark:border-primary-700 rounded text-xs font-mono">
           Ctrl+X
         </kbd>{" "}
         on any page to save it as a bookmark
@@ -88,7 +88,7 @@ const BookmarksWidget: React.FC = () => {
       {!isAdding && (
         <button
           onClick={() => setIsAdding(true)}
-          className="w-full py-2 px-4 border-2 border-dashed border-primary-300 text-primary-500 rounded-lg hover:bg-primary-50 transition-colors duration-200 font-medium"
+          className="w-full py-2 px-4 border-2 border-dashed border-primary-300 dark:border-primary-700 text-primary-500 dark:text-primary-400 rounded-lg hover:bg-primary-50 dark:hover:bg-primary-900/20 transition-colors duration-200 font-medium"
         >
           + Add Bookmark Manually
         </button>
@@ -96,7 +96,7 @@ const BookmarksWidget: React.FC = () => {
 
       {/* Add Bookmark Form */}
       {isAdding && (
-        <div className="bg-gray-50 p-4 rounded-lg space-y-3">
+        <div className="bg-gray-50 dark:bg-gray-700/50 p-4 rounded-lg space-y-3">
           <input
             type="text"
             placeholder="Title *"
@@ -104,7 +104,7 @@ const BookmarksWidget: React.FC = () => {
             onChange={(e) =>
               setNewBookmark({ ...newBookmark, title: e.target.value })
             }
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 placeholder:text-gray-400 dark:placeholder:text-gray-500"
             autoFocus
           />
 
@@ -115,19 +115,19 @@ const BookmarksWidget: React.FC = () => {
             onChange={(e) =>
               setNewBookmark({ ...newBookmark, url: e.target.value })
             }
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 placeholder:text-gray-400 dark:placeholder:text-gray-500"
           />
 
           <div className="flex gap-2">
             <button
               onClick={handleAddBookmark}
-              className="flex-1 bg-primary-500 text-white py-2 px-4 rounded-lg hover:bg-primary-600 transition-colors duration-200 font-medium"
+              className="flex-1 bg-primary-500 dark:bg-primary-600 text-white py-2 px-4 rounded-lg hover:bg-primary-600 dark:hover:bg-primary-700 transition-colors duration-200 font-medium"
             >
               Add Bookmark
             </button>
             <button
               onClick={() => setIsAdding(false)}
-              className="flex-1 bg-gray-300 text-gray-700 py-2 px-4 rounded-lg hover:bg-gray-400 transition-colors duration-200 font-medium"
+              className="flex-1 bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-gray-300 py-2 px-4 rounded-lg hover:bg-gray-400 dark:hover:bg-gray-500 transition-colors duration-200 font-medium"
             >
               Cancel
             </button>
@@ -138,10 +138,10 @@ const BookmarksWidget: React.FC = () => {
       {/* Bookmarks List */}
       <div className="space-y-2">
         {displayBookmarks.length === 0 ? (
-          <div className="text-center py-8 text-gray-400">
+          <div className="text-center py-8 text-gray-400 dark:text-gray-500">
             <p>No bookmarks yet.</p>
             <p className="text-sm mt-2">
-              Press <kbd className="px-2 py-1 bg-gray-200 rounded">Ctrl+X</kbd>{" "}
+              Press <kbd className="px-2 py-1 bg-gray-200 dark:bg-gray-700 rounded">Ctrl+X</kbd>{" "}
               on any page to save it!
             </p>
           </div>
@@ -149,7 +149,7 @@ const BookmarksWidget: React.FC = () => {
           displayBookmarks.map((bookmark) => (
             <div
               key={bookmark.id}
-              className="flex items-center gap-3 p-3 bg-white border border-gray-200 rounded-lg hover:shadow-md transition-shadow duration-200 group cursor-pointer"
+              className="flex items-center gap-3 p-3 bg-white dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 rounded-lg hover:shadow-md dark:hover:shadow-lg transition-shadow duration-200 group cursor-pointer"
               onClick={() => openBookmark(bookmark.url)}
             >
               {/* Favicon */}
@@ -163,8 +163,8 @@ const BookmarksWidget: React.FC = () => {
                   }}
                 />
               ) : (
-                <div className="w-5 h-5 flex-shrink-0 bg-gray-200 rounded flex items-center justify-center">
-                  <svg className="w-3 h-3 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                <div className="w-5 h-5 flex-shrink-0 bg-gray-200 dark:bg-gray-600 rounded flex items-center justify-center">
+                  <svg className="w-3 h-3 text-gray-400 dark:text-gray-500" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
                     <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd"/>
                   </svg>
@@ -173,10 +173,10 @@ const BookmarksWidget: React.FC = () => {
 
               {/* Title & URL */}
               <div className="flex-1 min-w-0">
-                <h4 className="font-medium text-gray-900 truncate hover:text-primary-500">
+                <h4 className="font-medium text-gray-900 dark:text-gray-100 truncate hover:text-primary-500 dark:hover:text-primary-400">
                   {bookmark.title}
                 </h4>
-                <p className="text-xs text-gray-500 truncate">{bookmark.url}</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{bookmark.url}</p>
               </div>
 
               {/* Delete Button */}
@@ -185,7 +185,7 @@ const BookmarksWidget: React.FC = () => {
                   e.stopPropagation()
                   handleDeleteBookmark(bookmark.id)
                 }}
-                className="opacity-0 group-hover:opacity-100 text-red-500 hover:text-red-700 p-1 transition-opacity duration-200"
+                className="opacity-0 group-hover:opacity-100 text-red-500 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 p-1 transition-opacity duration-200"
               >
                 <svg
                   className="w-4 h-4"
@@ -215,7 +215,7 @@ const BookmarksWidget: React.FC = () => {
                 url: `${process.env.PLASMO_PUBLIC_API_URL || "http://localhost:3000"}/dashboard/bookmarks`
               })
             }}
-            className="text-primary-500 hover:text-primary-600 font-medium text-sm"
+            className="text-primary-500 dark:text-primary-400 hover:text-primary-600 dark:hover:text-primary-300 font-medium text-sm"
           >
             View all {bookmarks.length} bookmarks →
           </button>
